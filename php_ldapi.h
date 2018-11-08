@@ -1,6 +1,8 @@
 #ifndef PHP_LDAPI_H
 #define PHP_LDAPI_H
 
+#include <ldap.h>
+
 #define PHP_LDAPI_EXT_NAME  "ldapi"
 #define PHP_LDAPI_EXT_VERSION  "0.0.1"
 #define PHP_LDAPI_EXT_NS "Ldapi"
@@ -9,7 +11,7 @@
 #include "config.h"
 #endif /* HAVE_CONFIG_H */
 
-#include "php.h"
+#include <php.h>
 
 #ifdef ZTS
 #include "TSRM.h"
