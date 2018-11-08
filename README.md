@@ -115,3 +115,35 @@ class Option
     
     public function getValue() : mixed;
 }
+```
+
+## Basic usage:
+
+```php
+
+$ldap = new Ldapi\Ldap('ldap-tls://ldap.example.com:369');
+
+if (! $ldap->bind()) {
+    die ('bind didn't work');
+}
+
+$result = $ldap->search(new Ldapi\Search(
+                             new Dn('dc=example,dc=com'),
+                             'uid=foo',
+                             ['uid', 'cn']
+                         ));
+                         
+if ($result->count() <= 0) {
+    die ('something went south');
+}
+
+foreach ($result as $entry) {
+    echo (string) $entry->getDn();
+    foreach ($entry->getAttributes() as $attribute) [
+        echo $attribute->getName();
+        foreach ($attribute->getValues() as $value) {
+            echo $value->getValue();
+        }
+    }
+}
+```
